@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Perfil de {{ user.username|capitalize }}{% endblock %}
+
+{% block content %}
+
+<h2>Perfil de usuario</h2>
+
+<div class="profile-card">
+
+    <p>
+        <strong>ID:</strong>
+        {{ user.id }}
+    </p>
+
+    <p>
+        <strong>Nombre de usuario:</strong>
+        {{ user.username|capitalize }}
+    </p>
+
+    <p>
+        <strong>Correo electrónico:</strong>
+        {{ user.email|default('Sin correo') }}
+    </p>
+
+</div>
+
+<div class="actions">
+
+    <a href="{{ url_for('users.index') }}">
+        Volver a usuarios
+    </a>
+
+    {% if session.get('user_id') == user.id %}
+
+        |
+        <a href="{{ url_for('users.edit_profile', id=user.id) }}">
+            Editar perfil
+        </a>
+
+        <form method="POST"
+      action="{{ url_for('users.delete_profile', id=user.id) }}"
+      class="delete-form"
+      style="display:inline;">
+
+            <input type="hidden"
+                   name="csrf_token"
+                   value="{{ csrf_token() }}">
+
+           <button type="submit">
+    Eliminar usuario
+</button>
+
+        </form>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

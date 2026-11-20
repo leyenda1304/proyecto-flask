@@ -1,0 +1,23 @@
+
+# Entorno virtual
+venv/
+.venv/
+
+# Archivos Python
+__pycache__/
+*.py[cod]
+
+# Pruebas y cobertura
+.pytest_cache/
+.coverage
+coverage/
+coverage.xml
+htmlcov/
+
+# Variables y secretos
+.env
+.env.*
+
+# Archivos temporales
+*.log
+desktop.ini

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+        Sistema de Usuarios
+        {% endblock %}
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script
+        src="{{ url_for('static', filename='js/script.js') }}"
+        defer>
+    </script>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+         ENCABEZADO
+    =========================================== -->
+
+    <header>
+
+        <h1>
+            Sistema de Usuarios
+        </h1>
+
+
+        <nav>
+
+            <a href="{{ url_for('users.index') }}">
+                Inicio
+            </a>
+
+
+            {% if session.get('user_id') %}
+
+                <a href="{{ url_for(
+                    'users.profile',
+                    id=session.get('user_id')
+                ) }}">
+                    Mi perfil
+                </a>
+
+
+                <a href="{{ url_for('users.logout') }}"
+                   class="logout-link">
+                    Cerrar sesión
+                </a>
+
+            {% else %}
+
+                <a href="{{ url_for('users.register') }}">
+                    Registrarse
+                </a>
+
+
+                <a href="{{ url_for('users.login') }}">
+                    Iniciar sesión
+                </a>
+
+            {% endif %}
+
+        </nav>
+
+    </header>
+
+
+    <!-- ==========================================
+         CONTENIDO PRINCIPAL
+    =========================================== -->
+
+    <main>
+
+
+        <!-- MENSAJES FLASH -->
+
+        {% include 'messages.html' %}
+
+
+        <!-- CONTENIDO DE CADA PÁGINA -->
+
+        {% block content %}
+
+        {% endblock %}
+
+
+    </main>
+
+
+    <!-- ==========================================
+         PIE DE PÁGINA
+    =========================================== -->
+
+    <footer>
+
+        <p>
+            Proyecto U1 - A5 | Flask
+        </p>
+
+        <p>
+            Sistema de Usuarios
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>
